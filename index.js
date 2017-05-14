@@ -49,7 +49,7 @@ class HTTPSwitch
 
 		if(!this.handlers || !this.handlers.length)
 		{
-			endResponse(500, 'No handlers specified');
+			endResponse(response, 500, 'No handlers specified');
 			return;
 		}
 
@@ -59,13 +59,12 @@ class HTTPSwitch
 			handler.handle(request, response).catch((x) =>
 			{
 				console.error(x);
-				response.statusCode = 500;
-				response.end();
+				endResponse(response, 500);
 			});
 		}
 		else
 		{
-			endResponse(500, 'No handler matched');
+			endResponse(response, 500, 'No handler matched');
 		}
 		return handler;
 	}
@@ -83,7 +82,7 @@ class HTTPSwitch
 
 HTTPSwitch.prototype.for = HTTPSwitch.addHandler;
 
-function endResponse(statusCode, message)
+function endResponse(response, statusCode, message)
 {
 	response.statusCode = statusCode;
 	response.end(message);
