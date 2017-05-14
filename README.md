@@ -89,3 +89,7 @@ Same as `HTTPSwitch.for`
 
 - `request: http.IncommingMessage`
 - `response: http.ServerResponse`
+
+#### returns
+
+- `handler: object`

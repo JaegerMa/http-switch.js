@@ -67,6 +67,7 @@ class HTTPSwitch
 		{
 			endResponse(500, 'No handler matched');
 		}
+		return handler;
 	}
 	findHandler(pathname)
 	{
