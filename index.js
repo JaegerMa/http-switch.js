@@ -89,4 +89,5 @@ function endResponse(statusCode, message)
 	response.end(message);
 }
 
+if(module && module.exports)
 module.exports = HTTPSwitch;
