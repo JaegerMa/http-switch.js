@@ -1,0 +1,25 @@
+{
+  "name": "http-switch",
+  "version": "1.0.0",
+  "description": "Switches incomming HTTP requests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaegerMa/http-switch.js.git"
+  },
+  "keywords": [
+    "http",
+    "server",
+    "switch",
+    "handler"
+  ],
+  "author": "JaegerMa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JaegerMa/http-switch.js/issues"
+  },
+  "homepage": "https://github.com/JaegerMa/http-switch.js#readme"
+}
