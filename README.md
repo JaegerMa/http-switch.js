@@ -56,6 +56,21 @@ Handler 3
 - `/abc`  
 Handler 3
 
+### Exceptions
+
+If the handler-function returns a Promise, HTTP-Switch will catch exceptions in that Promise and end the connection.
+
+```js
+
+httpHandler.on(/^\/foo/, async (request, response) =>
+{
+	let foo = await something();
+
+	throw new Error();
+	//Response will be closed with http code 500
+}
+```
+
 ## API
 
 ### `new HTTPSwitch(server)`

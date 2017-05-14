@@ -56,11 +56,15 @@ class HTTPSwitch
 		let handler = this.findHandler(pathname)
 		if(handler)
 		{
-			handler.handle(request, response).catch((x) =>
+			let promise = handler.handle(request, response);
+			if(promise && promise instanceof Promise)
 			{
-				console.error(x);
-				endResponse(response, 500);
-			});
+				promise.catch((x) =>
+				{
+					console.error(x);
+					endResponse(response, 500);
+				});
+			}
 		}
 		else
 		{
@@ -85,7 +89,12 @@ HTTPSwitch.prototype.for = HTTPSwitch.addHandler;
 function endResponse(response, statusCode, message)
 {
 	response.statusCode = statusCode;
-	response.end(message);
+	try
+	{
+		response.end(message);
+	}
+	catch(x)
+	{ }
 }
 
 if(module && module.exports)
