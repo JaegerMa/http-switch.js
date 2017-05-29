@@ -73,12 +73,13 @@ httpHandler.on(/^\/foo/, async (request, response) =>
 
 ## API
 
-### `new HTTPSwitch(server)`
+### `new HTTPSwitch([server])`
 
 #### arguments
 
 - `server: object`  
-Any object compatible to http.Server
+Any object compatible to http.Server  
+If ommited, you have to pass requests manually via the switchRequest-method
 
 #### returns
 

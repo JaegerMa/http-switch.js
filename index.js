@@ -14,7 +14,8 @@ class HTTPSwitch
 
 	init()
 	{
-		this.server.on('request', this.switchRequest.bind(this));
+		if(this.server && this.server.on)
+			this.server.on('request', this.switchRequest.bind(this));
 	}
 
 	addHandler(path, handler)
