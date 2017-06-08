@@ -37,7 +37,6 @@ class HTTPSwitch
 		this.handlers.push(
 			{
 				path,
-				isRegex: path instanceof RegExp,
 				handle: handleFunction
 			}
 		);
@@ -76,17 +75,26 @@ class HTTPSwitch
 	findHandler(pathname)
 	{
 		return this.handlers.find((handler) =>
-				pathname == handler.path
-			|| 	(
-					handler.isRegex
-				&& 	handler.path.test(pathname)
-				)
+				matches(handler.path, pathname)
 			);
 	}
 }
 
 HTTPSwitch.prototype.for = HTTPSwitch.addHandler;
 
+function matches(pattern, value)
+{
+	if(!pattern)
+		return true;
+
+	if(typeof(pattern) === 'string')
+		return value === pattern;
+	
+	if(pattern instanceof RegExp)
+		return pattern.test(value);
+
+	return false;
+}
 function endResponse(response, statusCode, message)
 {
 	response.statusCode = statusCode;
