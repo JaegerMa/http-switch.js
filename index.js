@@ -20,6 +20,9 @@ class HTTPSwitch
 
 	addHandler(path, handler)
 	{
+		if(typeof(path) === 'string' || (path && path instanceof RegExp))
+			path = { pathname: path };
+
 		let handleFunction;
 		switch(typeof(handler))
 		{
@@ -45,7 +48,7 @@ class HTTPSwitch
 
 	switchRequest(request, response)
 	{
-		var pathname = url.parse(request.url).pathname;
+		let requestURL = url.parse(request.url);
 
 		if(!this.handlers || !this.handlers.length)
 		{
@@ -53,7 +56,7 @@ class HTTPSwitch
 			return;
 		}
 
-		let handler = this.findHandler(pathname)
+		let handler = this.findHandler(requestURL);
 		if(handler)
 		{
 			let promise = handler.handle(request, response);
@@ -72,10 +75,12 @@ class HTTPSwitch
 		}
 		return handler;
 	}
-	findHandler(pathname)
+	findHandler(requestURL)
 	{
 		return this.handlers.find((handler) =>
-				matches(handler.path, pathname)
+					matches(handler.pathname, requestURL.pathname)
+				&&	matches(handler.hostname, requestURL.hostname)
+				&&	matches(handler.port, requestURL.port)
 			);
 	}
 }

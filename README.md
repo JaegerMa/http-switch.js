@@ -35,6 +35,10 @@ let handler404 =
 	}
 };
 
+httpSwitch.for({ hostname: 'example.com' }, handler404); //Handles every request for example.com
+
+httpSwitch.for({ hostname: '.+\.example.com', pathname: /^/ }, handler404); //Handles every request for *.example.com
+
 httpSwitch.for(/^/, handler404); //Handles every request
 
 server.listen(80);
@@ -85,16 +89,33 @@ If ommited, you have to pass requests manually via the switchRequest-method
 
 - `HTTPSwitch: object`
 
-### `HTTPSwitch.for(path, onRequest)`
+### `HTTPSwitch.for(pathname, onRequest)`
 
 #### arguments
 
-- `path: string or RegExp`
+- `pathname: string or RegExp`
 - `onRequest: function(request, response)`
 
 #### returns
 
 - `this`
+
+### `HTTPSwitch.for(path, onRequest)`
+
+#### arguments
+
+- `path: object`
+	- `pathname: string or RegExp`
+	- `hostname: string or RegExp`
+	- `port: int`
+- `onRequest: function(request, response)`
+
+#### returns
+
+- `this`
+
+### `HTTPSwitch.addHandler(pathname, onRequest)`
+Same as `HTTPSwitch.for`
 
 ### `HTTPSwitch.addHandler(path, onRequest)`
 Same as `HTTPSwitch.for`
