@@ -85,7 +85,7 @@ class HTTPSwitch
 	}
 }
 
-HTTPSwitch.prototype.for = HTTPSwitch.addHandler;
+HTTPSwitch.prototype.for = HTTPSwitch.prototype.addHandler;
 
 function matches(pattern, value)
 {
