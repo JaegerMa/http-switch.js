@@ -39,7 +39,7 @@ class HTTPSwitch
 		}
 		this.handlers.push(
 			{
-				path,
+				pattern: path,
 				handle: handleFunction
 			}
 		);
@@ -78,10 +78,12 @@ class HTTPSwitch
 	findHandler(requestURL)
 	{
 		return this.handlers.find((handler) =>
-					matches(handler.pathname || handler.path, requestURL.pathname)
-				&&	matches(handler.hostname || handler.host, requestURL.hostname)
-				&&	matches(handler.port, requestURL.port)
-			);
+		{
+			let pattern = handler.pattern;
+			return 	matches(pattern.pathname || pattern.path, requestURL.pathname)
+				&&	matches(pattern.hostname || pattern.host, requestURL.hostname)
+				&&	matches(pattern.port, requestURL.port)
+		});
 	}
 }
 
