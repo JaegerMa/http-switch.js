@@ -78,8 +78,8 @@ class HTTPSwitch
 	findHandler(requestURL)
 	{
 		return this.handlers.find((handler) =>
-					matches(handler.pathname, requestURL.pathname)
-				&&	matches(handler.hostname, requestURL.hostname)
+					matches(handler.pathname || handler.path, requestURL.pathname)
+				&&	matches(handler.hostname || handler.host, requestURL.hostname)
 				&&	matches(handler.port, requestURL.port)
 			);
 	}

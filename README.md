@@ -105,8 +105,8 @@ If ommited, you have to pass requests manually via the switchRequest-method
 #### arguments
 
 - `path: object`
-	- `pathname: string or RegExp`
-	- `hostname: string or RegExp`
+	- `pathname | path: string or RegExp`
+	- `hostname | host: string or RegExp`
 	- `port: int`
 - `onRequest: function(request, response)`
 
