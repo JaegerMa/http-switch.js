@@ -106,6 +106,8 @@ Any object compatible to http.Server
   If ommited, you have to pass requests manually via the switchRequest-method
   - [`handlers: array`]  
   HTTPSwitch handlers. Must be in internal http-switch format
+  - [`trimTrailingSlash: bool`]  
+  Trim trailing slash before matching handlers. URL in request isn't modified. Root slash isn't trimmed.
 
 #### returns
 

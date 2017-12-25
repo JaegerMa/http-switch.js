@@ -14,6 +14,8 @@ class HTTPSwitch
 		this.server = options.server;
 		this.handlers = options.handlers || [];
 
+		this.trimTrailingSlash = options.trimTrailingSlash;
+
 		this.init();
 	}
 
@@ -82,10 +84,14 @@ class HTTPSwitch
 	}
 	findHandler(requestURL)
 	{
+		let urlPathname = requestURL.pathname;
+		if(this.trimTrailingSlash && urlPathname.length > 1)
+			urlPathname = urlPathname.replace(/\/$/, '');
+
 		return this.handlers.find((handler) =>
 		{
 			let pattern = handler.pattern;
-			return 	matches(pattern.pathname || pattern.path, requestURL.pathname)
+			return 	matches(pattern.pathname || pattern.path, urlPathname)
 				&&	matches(pattern.hostname || pattern.host, requestURL.hostname)
 				&&	matches(pattern.port, requestURL.port)
 		});
