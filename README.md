@@ -77,13 +77,35 @@ httpHandler.on(/^\/foo/, async (request, response) =>
 
 ## API
 
-### `new HTTPSwitch([server])`
+### `new HTTPSwitch()`
+
+As no server is given, you have to pass requests manually via the switchRequest-method
+
+#### returns
+
+- `HTTPSwitch: object`
+
+### `new HTTPSwitch(server)`
 
 #### arguments
 
 - `server: object`  
 Any object compatible to http.Server  
-If ommited, you have to pass requests manually via the switchRequest-method
+
+#### returns
+
+- `HTTPSwitch: object`
+
+### `new HTTPSwitch(options)`
+
+#### arguments
+
+- `options: object`
+  - [`server: object`]  
+  Any object compatible to http.Server  
+  If ommited, you have to pass requests manually via the switchRequest-method
+  - [`handlers: array`]  
+  HTTPSwitch handlers. Must be in internal http-switch format
 
 #### returns
 

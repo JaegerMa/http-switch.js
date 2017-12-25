@@ -4,10 +4,15 @@ const url = require('url');
 
 class HTTPSwitch
 {
-	constructor(server)
+	constructor(options)
 	{
-		this.server = server;
-		this.handlers = [];
+		if(typeof(options) === 'object' && typeof(options.on) === 'function')
+			options = { server: options };
+		else
+			options = options || {};
+		
+		this.server = options.server;
+		this.handlers = options.handlers || [];
 
 		this.init();
 	}
