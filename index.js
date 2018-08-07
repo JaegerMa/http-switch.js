@@ -55,15 +55,13 @@ class HTTPSwitch
 
 	switchRequest(request, response)
 	{
-		let requestURL = url.parse(request.url);
-
 		if(!this.handlers || !this.handlers.length)
 		{
 			endResponse(response, 500, 'No handlers specified');
 			return;
 		}
 
-		let handler = this.findHandler(requestURL);
+		let handler = this.findHandler(request);
 		if(handler)
 		{
 			let promise = handler.handle(request, response);
@@ -82,8 +80,18 @@ class HTTPSwitch
 		}
 		return handler;
 	}
-	findHandler(requestURL)
+	findHandler(request)
 	{
+		let requestURL;
+		if(typeof (request) === 'string')
+		{
+			requestURL = url.parse(request);
+			request = {};
+		}
+		else
+			requestURL = url.parse(request.url);
+
+		
 		let urlPathname = requestURL.pathname;
 		if(this.trimTrailingSlash && urlPathname.length > 1)
 			urlPathname = urlPathname.replace(/\/$/, '');
@@ -91,9 +99,9 @@ class HTTPSwitch
 		return this.handlers.find((handler) =>
 		{
 			let pattern = handler.pattern;
-			return 	matches(pattern.pathname || pattern.path, urlPathname)
-				&&	matches(pattern.hostname || pattern.host, requestURL.hostname)
-				&&	matches(pattern.port, requestURL.port)
+			return matches(pattern.pathname || pattern.path, urlPathname)
+				&& matches(pattern.hostname || pattern.host, request.headers && request.headers.host)
+				&& matches(pattern.port, request.socket && request.socket.remotePort);
 		});
 	}
 }
