@@ -27,6 +27,8 @@ class HTTPSwitch
 
 	addHandler(path, handler)
 	{
+		path = path || {};
+
 		if(typeof(path) === 'string' || (path && path instanceof RegExp))
 			path = { pathname: path };
 
