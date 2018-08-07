@@ -104,7 +104,8 @@ class HTTPSwitch
 			return matches(pattern.pathname || pattern.path, urlPathname)
 				&& matches(pattern.hostname || pattern.host, request.headers && request.headers.host)
 				&& matches(pattern.port, request.socket && request.socket.remotePort)
-				&& matches(pattern.method, request.method);
+				&& matches(pattern.method, request.method)
+				&& matches(pattern.httpVersion, request.httpVersion);
 		});
 	}
 }
