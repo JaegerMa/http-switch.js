@@ -39,6 +39,8 @@ httpSwitch.for({ hostname: 'example.com' }, handler404); //Handles every request
 
 httpSwitch.for({ hostname: '.+\.example.com', pathname: /^/ }, handler404); //Handles every request for *.example.com
 
+httpSwitch.for({ port: 1337, method: 'PUT' }, handler404); //Handles every PUT request on port 1337
+
 httpSwitch.for(/^/, handler404); //Handles every request
 
 server.listen(80);
@@ -132,6 +134,7 @@ Any object compatible to http.Server
 	- `pathname | path: string or RegExp`
 	- `hostname | host: string or RegExp`
 	- `port: int`
+	- `method: string or RegExp`
 - `onRequest: function(request, response)`
 
 #### returns
