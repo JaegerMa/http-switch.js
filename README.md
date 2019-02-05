@@ -70,7 +70,7 @@ If the handler-function returns a Promise, HTTP-Switch will catch exceptions in 
 
 ```js
 
-httpHandler.on(/^\/foo/, async (request, response) =>
+httpHandler.for(/^\/foo/, async (request, response) =>
 {
 	let foo = await something();
 
