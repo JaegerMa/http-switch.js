@@ -102,6 +102,10 @@ class HTTPSwitch
 			return matches(pattern.pathname || pattern.path, urlPathname)
 				&& matches(pattern.hostname || pattern.host, request.headers && request.headers.host)
 				&& matches(pattern.port, request.socket && request.socket.localPort)
+				&& matches(pattern.remoteAddress, request.socket && request.socket.remoteAddress)
+				&& matches(pattern.remotePort, request.socket && request.socket.remotePort)
+				&& matches(pattern.localAddress, request.socket && request.socket.localAddress)
+				&& matches(pattern.localPort, request.socket && request.socket.localPort)
 				&& matches(pattern.method, request.method)
 				&& matches(pattern.httpVersion, request.httpVersion);
 		});
