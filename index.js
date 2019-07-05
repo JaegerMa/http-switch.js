@@ -67,21 +67,19 @@ class HTTPSwitch
 		if(!handler)
 		{
 			endResponse(response, 500, 'No handler matched');
-			return handler;
+			return;
 		}
 
 		try
 		{
-			await handler.handle(request, response);
+			return await handler.handle(request, response);
 		}
 		catch(x)
 		{
 			console.error(x);
 			endResponse(response, 500);
-			return handler;
+			return;
 		}
-		
-		return handler;
 	}
 	findHandler(request)
 	{
