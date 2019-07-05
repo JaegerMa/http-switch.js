@@ -64,22 +64,22 @@ class HTTPSwitch
 		}
 
 		let handler = this.findHandler(request);
-		if(handler)
-		{
-			let promise = handler.handle(request, response);
-			if(promise && promise instanceof Promise)
-			{
-				promise.catch((x) =>
-				{
-					console.error(x);
-					endResponse(response, 500);
-				});
-			}
-		}
-		else
+		if(!handler)
 		{
 			endResponse(response, 500, 'No handler matched');
+			return handler;
 		}
+
+		let promise = handler.handle(request, response);
+		if(promise && promise instanceof Promise)
+		{
+			promise.catch((x) =>
+			{
+				console.error(x);
+				endResponse(response, 500);
+			});
+		}
+		
 		return handler;
 	}
 	findHandler(request)
