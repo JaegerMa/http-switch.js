@@ -127,7 +127,7 @@ function matches(pattern, value)
 	if(pattern instanceof RegExp)
 		return pattern.test(value);
 
-	return false;
+	return value === pattern;
 }
 function endResponse(response, statusCode, message)
 {
