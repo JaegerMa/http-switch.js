@@ -136,6 +136,10 @@ Any object compatible to http.Server
 	- `pathname | path: string or RegExp`
 	- `hostname | host: string or RegExp`
 	- `port: int`
+	- `localAddress: string or RegExp`
+	- `localPort: int`
+	- `remoteAddress: string or RegExp`
+	- `remotePort: int`
 	- `method: string or RegExp`
 	- `httpVersion: string or RegExp`
 - `onRequest: function(request, response)`

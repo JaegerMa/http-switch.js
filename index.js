@@ -89,7 +89,9 @@ class HTTPSwitch
 			request = {};
 		}
 		else
+		{
 			requestURL = url.parse(request.url);
+		}
 
 		
 		let urlPathname = requestURL.pathname;
