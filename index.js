@@ -55,7 +55,7 @@ class HTTPSwitch
 		return this;
 	}
 
-	switchRequest(request, response)
+	async switchRequest(request, response)
 	{
 		if(!this.handlers || !this.handlers.length)
 		{
@@ -70,14 +70,15 @@ class HTTPSwitch
 			return handler;
 		}
 
-		let promise = handler.handle(request, response);
-		if(promise && promise instanceof Promise)
+		try
 		{
-			promise.catch((x) =>
-			{
-				console.error(x);
-				endResponse(response, 500);
-			});
+			await handler.handle(request, response);
+		}
+		catch(x)
+		{
+			console.error(x);
+			endResponse(response, 500);
+			return handler;
 		}
 		
 		return handler;
