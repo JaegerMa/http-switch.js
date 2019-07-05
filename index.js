@@ -13,7 +13,7 @@ class HTTPSwitch
 		
 		this.server = options.server;
 		this.handlers = options.handlers || [];
-		this.trimTrailingSlash = options.trimTrailingSlash;
+		this.trimTrailingSlash = options.trimTrailingSlash || false;
 
 		this.init();
 	}
