@@ -24,12 +24,12 @@ class HTTPSwitch
 			this.server.on('request', this.switchRequest.bind(this));
 	}
 
-	addHandler(path, handler)
+	addHandler(pattern, handler)
 	{
-		path = path || {};
+		pattern = pattern || {};
 
-		if(typeof(path) === 'string' || (path && path instanceof RegExp))
-			path = { pathname: path };
+		if(typeof(pattern) === 'string' || (pattern && pattern instanceof RegExp))
+			pattern = { pathname: pattern };
 
 		let handleFunction;
 		switch(typeof(handler))
@@ -47,7 +47,7 @@ class HTTPSwitch
 		}
 		this.handlers.push(
 			{
-				pattern: path,
+				pattern: pattern,
 				handle: handleFunction
 			}
 		);
