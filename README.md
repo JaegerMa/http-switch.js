@@ -37,7 +37,7 @@ let handler404 =
 
 httpSwitch.for({ hostname: 'example.com' }, handler404); //Handles every request for example.com
 
-httpSwitch.for({ hostname: '.+\.example.com', pathname: /^/ }, handler404); //Handles every request for *.example.com
+httpSwitch.for({ hostname: /.+\.example.com/, pathname: /^/ }, handler404); //Handles every request for *.example.com
 
 httpSwitch.for({ port: 1337, method: 'DELETE' }, handler404); //Handles every DELETE request
 
