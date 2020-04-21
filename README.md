@@ -15,6 +15,12 @@ const HTTPSwitch = require('http-switch');
 let server = http.createServer();
 let httpSwitch = new HTTPSwitch(server);
 
+let fooHandler = function(request, response)
+{
+	/* Do foo */
+};
+
+
 httpSwitch.for('/', (request, response) => //Handles requests matching string '/'
 {
 	/* Serve index.html */
@@ -27,30 +33,23 @@ httpSwitch.for(/^\/foo/, (request, response) => //Handles requests matching rege
 	/* Serve foo.html */
 });
 
-let handler404 =
-{
-	handle: function(request, response)
-	{
-		/* Serve 404.html */
-	}
-};
+httpSwitch.for({ hostname: 'example.com' }, fooHandler); //Handles every request for example.com
 
-httpSwitch.for({ hostname: 'example.com' }, handler404); //Handles every request for example.com
+httpSwitch.for({ hostname: /.+\.example.com/, pathname: /^/ }, fooHandler); //Handles every request for *.example.com
 
-httpSwitch.for({ hostname: /.+\.example.com/, pathname: /^/ }, handler404); //Handles every request for *.example.com
+httpSwitch.for({ port: 1337, method: 'DELETE' }, fooHandler); //Handles every DELETE request
 
-httpSwitch.for({ port: 1337, method: 'DELETE' }, handler404); //Handles every DELETE request
+httpSwitch.for({ port: 1337, method: 'PUT' }, fooHandler); //Handles every PUT request on port 1337
 
-httpSwitch.for({ port: 1337, method: 'PUT' }, handler404); //Handles every PUT request on port 1337
+httpSwitch.for({ method: 'PATCH', pathname: /foobar$/ }, fooHandler); //Handles every PATCH request whose URL ends with foobar
 
-httpSwitch.for({ method: 'PATCH', pathname: /foobar$/ }, handler404); //Handles every PATCH request whose URL ends with foobar
-
-httpSwitch.for({ httpVersion: '1.0' }, handler404); //Handles every HTTP 1.0 request
+httpSwitch.for({ httpVersion: '1.0' }, fooHandler); //Handles every HTTP 1.0 request
 
 //Handles every POST HTTP 1.1 request on port 4242 for hostname baz.example.com whose URL starts with /foo and ends with bar
-httpSwitch.for({ httpVersion: '1.1', method: 'POST', port: 4242, hostname: 'baz.example.com', pathname: /^\/foo.*bar$/ }, handler404);
+httpSwitch.for({ httpVersion: '1.1', method: 'POST', port: 4242, hostname: 'baz.example.com', pathname: /^\/foo.*bar$/ }, fooHandler);
 
-httpSwitch.for(/^/, handler404); //Handles every request
+httpSwitch.for(/^/, fooHandler); //Handles every request
+
 
 server.listen(80);
 ```
