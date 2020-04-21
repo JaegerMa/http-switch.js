@@ -6,11 +6,11 @@ class HTTPSwitch
 {
 	constructor(options)
 	{
-		if(typeof(options) === 'object' && typeof(options.on) === 'function')
+		if(typeof (options) === 'object' && typeof (options.on) === 'function')
 			options = { server: options };
 		else
 			options = options || {};
-		
+
 		this.server = options.server;
 		this.handlers = options.handlers || [];
 		this.trimTrailingSlash = options.trimTrailingSlash || false;
@@ -28,17 +28,17 @@ class HTTPSwitch
 	{
 		pattern = pattern || {};
 
-		if(typeof(pattern) === 'string' || (pattern && pattern instanceof RegExp))
+		if(typeof (pattern) === 'string' || (pattern && pattern instanceof RegExp))
 			pattern = { pathname: pattern };
 
 		let handleFunction;
-		switch(typeof(handler))
+		switch(typeof (handler))
 		{
 			case 'function':
 				handleFunction = handler;
 				break;
 			case 'object':
-				if(!handler || typeof(handler.handle) !== 'function')
+				if(!handler || typeof (handler.handle) !== 'function')
 					throw new Error('handler must have a function called \'handle\'');
 				handleFunction = handler.handle.bind(handler);
 				break;
@@ -93,7 +93,7 @@ class HTTPSwitch
 			requestURL = url.parse(request.url);
 		}
 
-		
+
 		let urlPathname = requestURL.pathname;
 		if(this.trimTrailingSlash && urlPathname.length > 1)
 			urlPathname = urlPathname.replace(/\/$/, '');
@@ -121,9 +121,9 @@ function matches(pattern, value)
 	if(!pattern)
 		return true;
 
-	if(typeof(pattern) === 'string')
+	if(typeof (pattern) === 'string')
 		return value === pattern;
-	
+
 	if(pattern instanceof RegExp)
 		return pattern.test(value);
 
@@ -141,4 +141,4 @@ function endResponse(response, statusCode, message)
 }
 
 if(module && module.exports)
-module.exports = HTTPSwitch;
+	module.exports = HTTPSwitch;
