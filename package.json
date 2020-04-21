@@ -1,6 +1,6 @@
 {
   "name": "http-switch",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Switches incomming HTTP requests",
   "main": "index.js",
   "repository": {
