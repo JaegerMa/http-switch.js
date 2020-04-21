@@ -39,9 +39,16 @@ httpSwitch.for({ hostname: 'example.com' }, handler404); //Handles every request
 
 httpSwitch.for({ hostname: '.+\.example.com', pathname: /^/ }, handler404); //Handles every request for *.example.com
 
+httpSwitch.for({ port: 1337, method: 'DELETE' }, handler404); //Handles every DELETE request
+
 httpSwitch.for({ port: 1337, method: 'PUT' }, handler404); //Handles every PUT request on port 1337
 
+httpSwitch.for({ method: 'PATCH', pathname: /foobar$/ }, handler404); //Handles every PATCH request whose URL ends with foobar
+
 httpSwitch.for({ httpVersion: '1.0' }, handler404); //Handles every HTTP 1.0 request
+
+//Handles every POST HTTP 1.1 request on port 4242 for hostname baz.example.com whose URL starts with /foo and ends with bar
+httpSwitch.for({ httpVersion: '1.1', method: 'POST', port: 4242, hostname: 'baz.example.com', pathname: /^\/foo.*bar$/ }, handler404);
 
 httpSwitch.for(/^/, handler404); //Handles every request
 
