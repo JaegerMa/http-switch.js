@@ -2,7 +2,7 @@
   "name": "http-switch",
   "version": "2.0.1",
   "description": "Switches incomming HTTP requests",
-  "main": "index.js",
+  "main": "bin/module.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JaegerMa/http-switch.js.git"
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/JaegerMa/http-switch.js/issues"
   },
-  "homepage": "https://github.com/JaegerMa/http-switch.js#readme"
+  "homepage": "https://github.com/JaegerMa/http-switch.js#readme",
+  "devDependencies": {
+    "@types/node": "^14.14.17"
+  }
 }

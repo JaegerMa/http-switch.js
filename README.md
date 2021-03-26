@@ -157,13 +157,10 @@ Same as `HTTPSwitch.for`
 ### `HTTPSwitch.addHandler(path, onRequest)`
 Same as `HTTPSwitch.for`
 
-### `HTTPSwitch.switchRequest(request, response)`
+### `HTTPSwitch.switchRequest(request, response, { handleErrors = true } = {})`
 
 #### arguments
 
 - `request: http.IncommingMessage`
 - `response: http.ServerResponse`
-
-#### returns
-
-- `handler: object`
+- `handleErrorrs: bool`
