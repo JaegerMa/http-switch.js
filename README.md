@@ -1,10 +1,7 @@
 # http-switch
   Simple switch for http requests
 
-```shell
-npm install --save http-switch
-```
-Basically Http-Switch is another http handler, but it allows you to create your own server and handles only the 'request'-event. This makes it possible to use either `http`, `https`, `spdy` or any other `http`-compatible server.
+Basically http-switch is another http handler, but it allows you to create your own server and handles only the 'request'-event. This makes it possible to use either `http`, `https`, `spdy` or any other `http`-compatible server.
 
 ## Usage
 
