@@ -16,7 +16,7 @@ type HTTPSwitchPattern =
 		method?: string | RegExp,
 		httpVersion?: string | RegExp;
 	};
-type HTTPSwitchHandleFunction = (request: http.IncomingMessage, response: http.ServerResponse) => void | Promise<void>;
+type HTTPSwitchHandleFunction = (request: http.IncomingMessage, response: http.ServerResponse) => void | Promise<any>;
 type HTTPSwitchHandler =
 	{
 		pattern: HTTPSwitchPattern,
